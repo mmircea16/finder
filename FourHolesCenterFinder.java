@@ -70,17 +70,18 @@ public class FourHolesCenterFinder extends Finder{
             return false;
         else
             // test if the determined intersection point belongs to the diagonal segments
-            if ( (Math.min( this.x[pattern[i][0]], this.x[pattern[i][2]]) < this.xP) &&
-                this.xP < Math.max(this.x[pattern[i][0]], this.x[pattern[i][2]]) & 
-                Math.min( this.x[pattern[i][1]], this.x[pattern[i][3]]) < this.xP &
-                this.xP < Math.max(this.x[pattern[i][1]], this.x[pattern[i][3]]) &
-                Math.min( this.y[pattern[i][0]], this.y[pattern[i][2]]) < this.yP &
-                this.yP < Math.max(this.y[pattern[i][0]], this.y[pattern[i][2]]) & 
-                Math.min( this.y[pattern[i][1]], this.y[pattern[i][3]]) < this.yP &
-                this.yP < Math.max(this.y[pattern[i][1]], this.y[pattern[i][3]]))
-                return true;
-            else
-                return false;     
+        {
+            int[] aPattern = pattern[i];
+            return isBetweenCoordinates(this.x[aPattern[0]], this.x[aPattern[2], this.xP) &
+                    isBetweenCoordinates(this.x[aPattern[1]], this.x[aPattern[3], this.xP) &
+                    isBetweenCoordinates(this.y[aPattern[0]], this.y[aPattern[2], this.yP) &
+                    isBetweenCoordinates(this.y[aPattern[1]], this.y[aPattern[3], this.yP)
+        }
+    }
+
+    private boolean isBetweenCoordinates(int oneEnd, int anotherEnd, int coordinate) {
+        return (Math.min(oneEnd, anotherEnd) < coordinate) &&
+                coordinate < Math.max(oneEnd, anotherEnd)
     }
     
     /**
