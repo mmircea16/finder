@@ -42,16 +42,23 @@ public abstract class Finder {
     protected void calculateCenter(int[] someOrder){
         if (Constants.DEBUG) System.out.format("\n~~Testing pattern %d %d %d %d\n",
                 someOrder[0],someOrder[1],someOrder[2], someOrder[3]);
+
+        int firstPoint = someOrder[0];
+        int secondPoint = someOrder[1];
+        int thirdPoint = someOrder[2];
+        int fourthPoint = someOrder[3];
+
+        float oneDiagonalSlope = computeSlope(thirdPoint, firstPoint);
         
-        //slope of first line
-        float mA = (y[someOrder[2]]-y[someOrder[0]])/(x[someOrder[2]]-x[someOrder[0]]);
-        
-        //slope of second line
-        float mB = (y[someOrder[3]]-y[someOrder[1]])/(x[someOrder[3]]-x[someOrder[1]]);
+        float anotherDiagonalSlope = computeSlope(fourthPoint, secondPoint);
         
         //calculate intersection point of first and second lines
-        this.xP = (y[someOrder[1]]-y[someOrder[0]]+mA*x[someOrder[0]]-mB*x[someOrder[1]])/(mA-mB);
-        this.yP = mA*(xP-x[someOrder[0]])+y[someOrder[0]];
+        this.xP = (y[secondPoint]-y[firstPoint]+oneDiagonalSlope*x[firstPoint]-anotherDiagonalSlope*x[secondPoint])/(oneDiagonalSlope-anotherDiagonalSlope);
+        this.yP = oneDiagonalSlope*(xP-x[firstPoint])+y[firstPoint];
+    }
+
+    private float computeSlope(int from, int to) {
+        return (y[from]-y[to])/(x[from]-x[to]);
     }
 
     public int[] getOrder(){
