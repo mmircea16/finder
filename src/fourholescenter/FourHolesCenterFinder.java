@@ -71,16 +71,16 @@ public class FourHolesCenterFinder extends Finder{
         else
         {
             int[] aPattern = pattern[i];
-            return isBetweenCoordinates(this.x[aPattern[0]], this.x[aPattern[2], this.xP) &
-                    isBetweenCoordinates(this.x[aPattern[1]], this.x[aPattern[3], this.xP) &
-                    isBetweenCoordinates(this.y[aPattern[0]], this.y[aPattern[2], this.yP) &
-                    isBetweenCoordinates(this.y[aPattern[1]], this.y[aPattern[3], this.yP)
+            return isBetweenCoordinates(this.x[aPattern[0]], this.x[aPattern[2]], this.xP) &
+                    isBetweenCoordinates(this.x[aPattern[1]], this.x[aPattern[3]], this.xP) &
+                    isBetweenCoordinates(this.y[aPattern[0]], this.y[aPattern[2]], this.yP) &
+                    isBetweenCoordinates(this.y[aPattern[1]], this.y[aPattern[3]], this.yP);
         }
     }
 
-    private boolean isBetweenCoordinates(int oneEnd, int anotherEnd, int coordinate) {
+    private boolean isBetweenCoordinates(float oneEnd, float anotherEnd, float coordinate) {
         return (Math.min(oneEnd, anotherEnd) < coordinate) &&
-                coordinate < Math.max(oneEnd, anotherEnd)
+                coordinate < Math.max(oneEnd, anotherEnd);
     }
     
     /**
