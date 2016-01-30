@@ -66,10 +66,9 @@ public class FourHolesCenterFinder extends Finder{
         //test if the point is within some plausible limits 
         //(in reality only this condition should be enough, as the quadrangle 
         //tends to be a rectangle)
-        if ( xP<Constants.LIM_MIN | xP>Constants.LIM_MAX | xP<Constants.LIM_MIN | xP>Constants.LIM_MAX )
+        if ( !isBetweenCoordinates(Constants.LIM_MIN, Constants.LIM_MAX, xP) || !isBetweenCoordinates(Constants.LIM_MIN, Constants.LIM_MAX, yP) )
             return false;
         else
-            // test if the determined intersection point belongs to the diagonal segments
         {
             int[] aPattern = pattern[i];
             return isBetweenCoordinates(this.x[aPattern[0]], this.x[aPattern[2], this.xP) &
