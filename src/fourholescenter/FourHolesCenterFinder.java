@@ -132,18 +132,27 @@ public class FourHolesCenterFinder extends Finder{
         double cos = (yCoord- this.yP)/Math.sqrt(Math.pow(xCoord-this.xP,2)+Math.pow(yCoord-this.yP,2));
         //there are two solutions for the angle
         //select the one which satisfies both cosine and sine 
-        double angle = Math.acos(cos);
-        if (Math.sin(angle)*sin<0)
-            angle = -angle;
+        double angle = getAngleWithSinAndCos(sin, cos);
         //if (Constants.DEBUG) System.out.format("angle=%f%n",angle*180/Math.PI);
         
-        //fit angle:
-        angle = angle*180/Math.PI; //in degress
-        if (angle<0)
-            angle = 360+angle; //between 0~360 deg
+        angle = fromRadiansTo360(angle);
         
         if (Constants.DEBUG) System.out.format("sin=%f, cos=%f, angle=%f%n",sin, cos, angle);
         return angle;
     }
-    
+
+    private double getAngleWithSinAndCos(double sin, double cos) {
+        double angle = Math.acos(cos);
+        if (Math.sin(angle)*sin<0)
+            angle = -angle;
+        return angle;
+    }
+
+    private double fromRadiansTo360(double angle) {
+        angle = angle*180/Math.PI; //in degress
+        if (angle<0)
+            angle = 360+angle; //between 0~360 deg
+        return angle;
+    }
+
 }
