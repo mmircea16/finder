@@ -127,14 +127,14 @@ public class FourHolesCenterFinder extends Finder{
         if (Constants.DEBUG) System.out.format("Calculating P(%f,%f): ",xCoord, yCoord);
         
         //calculate the sine (cross product)
-        double sin = (xCoord - this.xP)/(Math.sqrt(Math.pow(xCoord-this.xP,2)+Math.pow(yCoord-this.yP,2)));
+        double segmentLength = Math.sqrt(Math.pow(xCoord - this.xP, 2) + Math.pow(yCoord - this.yP, 2));
+        double sin = (xCoord - this.xP)/ segmentLength;
         //calculate the cosine: dot product
-        double cos = (yCoord- this.yP)/Math.sqrt(Math.pow(xCoord-this.xP,2)+Math.pow(yCoord-this.yP,2));
-        //there are two solutions for the angle
-        //select the one which satisfies both cosine and sine 
+        double cos = (yCoord- this.yP)/ segmentLength;
+
         double angle = getAngleWithSinAndCos(sin, cos);
         //if (Constants.DEBUG) System.out.format("angle=%f%n",angle*180/Math.PI);
-        
+
         angle = fromRadiansTo360(angle);
         
         if (Constants.DEBUG) System.out.format("sin=%f, cos=%f, angle=%f%n",sin, cos, angle);
